@@ -29,17 +29,14 @@
 <script type="text/javascript">
 
 
-
-
-
 var alarmFlag = true;
 function playMe(playfile){
 	alert(playfile)
 }
 
-function (){
+function checkHealthRule(){
 $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7111/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7772/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
             type: 'GET',
             headers: {
                 'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0',
@@ -49,9 +46,9 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('CPU Utilization BRMS TEST') || str.includes('Shafafiya Pending Requests count High')){
+				if(str.includes('CPU Utilization Test') || str.includes('Shafafiya Pending Requests count High')){
 					var alertname = "NA";
-					if(str.includes('CPU Utilization BRMS TEST')){
+					if(str.includes('CPU Utilization Test')){
 						alertname = "media/pend_prior_req_dhpo.mp3";
 					} else if(str.includes('Shafafiya Pending Requests count High')) {
 						alertname = "media/pend_prior_req_shafafiya.mp3";
@@ -83,7 +80,7 @@ function resetAlarmFlag(){
 	}
 }
 checkHealthRule();
-setInterval(checkHealthRule, 550000);
+setInterval(checkHealthRule, 55000);
 setInterval(resetAlarmFlag, 900000);
 </script>
 
