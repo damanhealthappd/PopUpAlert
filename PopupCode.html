@@ -24,14 +24,14 @@
 	    </script>
 	    <body style="background:transparent">
 
-<button onclick='window.alert("This is Test Alert Box for ApPD")'>Test PopUp</button>
+<button onclick='window.alert("This is Test Alert Box for AppD")'>Test PopUp</button>
 
 <script type="text/javascript">
 
 
 var alarmFlag = true;
-function playMe(playfile){
-	alert(playfile)
+function playMe(Event){
+	alert(Event)
 }
 
 function checkHealthRule(){
@@ -47,23 +47,23 @@ $.ajax({
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
 				if(str.includes('CPU Utilization Test') || str.includes('Shafafiya Pending Requests count High')){
-					var alertname = "NA";
+					var eventname = "NA";
 					if(str.includes('CPU Utilization Test')){
-						alertname = "media/pend_prior_req_dhpo.mp3";
+						eventname = "High CPU Utilization";
 					} else if(str.includes('Shafafiya Pending Requests count High')) {
-						alertname = "media/pend_prior_req_shafafiya.mp3";
+						eventname = "High CPU Not FOund";
 					}
 					if(alarmFlag){
-						playMe(alertname);
+						playMe(eventname);
 						alarmFlag = false;
 						console.log('alarmFlag = false');
 					} else {
 						console.log('alarmFlag = true');
 					}
 					//alert('Success!');
-					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' found');
+					console.log('Alert High CPU Utilization found');
 				} else {
-					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' not found');
+					console.log('Alert High CPU Utilization not found');
 				}
             },
             error: function (error) {
